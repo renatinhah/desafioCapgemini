@@ -1,4 +1,4 @@
-package br.com.desafio.capgemini.renata;
+package br.com.capgemini.desafio.renata;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

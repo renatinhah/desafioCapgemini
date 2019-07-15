@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.capgemini.desafio.renata.dto.BalanceDTO;
 import br.com.capgemini.desafio.renata.entity.Account;
 import br.com.capgemini.desafio.renata.entity.AccountId;
 import br.com.capgemini.desafio.renata.repository.AccountRepository;
@@ -22,11 +23,14 @@ public class AccountService {
 		return accountRepository.findAll();
 	}
 	
-	public Double seeBalance(AccountId accountId) {
-//		Account account = accountRepository.findById(accountId);
-//		Double balance = account.getBalance();
+	public Double seeBalance(BalanceDTO balanceDto) {
+		AccountId accountId = AccountId.builder().
+				agency(balanceDto.getAgency()).
+				account(balanceDto.getAccount()).
+				build();
+		Account account = accountRepository.findByAccountId(accountId);
+		Double balance = account.getBalance();
 //		
-//		return balance;
-		return null;
+		return balance;
 	}
 }

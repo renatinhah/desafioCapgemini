@@ -31,41 +31,43 @@ public class AccountService {
 				build();
 		Double balance = 0D;
 		Account account = accountRepository.findByAccountId(accountId);
-//		if(balanceDto.equals(account.getPassword())) {
-//			balance = account.getBalance();
-//		}
+		
+		if(balanceDto.getPassword().equals(account.getPassword())) {
+			balance = account.getBalance();
+		}
 		return balance;
 	}
 	
-	public Account deposit(UpdateBalanceDTO deposit) {
+	public Account deposit(UpdateBalanceDTO updateBalanceDTO) {
 		AccountId accountId = AccountId.builder().
-				agency(deposit.getAgency()).
-				account(deposit.getAccount()).
+				agency(updateBalanceDTO.getAgency()).
+				account(updateBalanceDTO.getAccount()).
 				build();
 		Account account = accountRepository.findByAccountId(accountId);
 		Double newBalance = 0D;
-		if(deposit.getValue() > 0) {
-			newBalance = account.getBalance() + deposit.getValue();
+		if(updateBalanceDTO.getValue() > 0) {
+			newBalance = account.getBalance() + updateBalanceDTO.getValue();
 		}
-//		account.builder().balance(newBalance).build(); alguma coisa de acesso static
 		account.setBalance(newBalance);
 		Account accountUpdated = accountRepository.save(account);
 		
 		return accountUpdated;
 	}
 	
-	public Account cashOut(UpdateBalanceDTO deposit) {
+	public Account cashOut(UpdateBalanceDTO updateBalanceDTO) {
 		AccountId accountId = AccountId.builder().
-				agency(deposit.getAgency()).
-				account(deposit.getAccount()).
+				agency(updateBalanceDTO.getAgency()).
+				account(updateBalanceDTO.getAccount()).
 				build();
 		Account account = accountRepository.findByAccountId(accountId);
-		Double newBalance = 0D;
-		Double balance = account.getBalance();
-		if(balance >= deposit.getValue()) {
-			newBalance = balance - deposit.getValue();
+		if(updateBalanceDTO.getPassword().equals(account.getPassword())) {
+			Double newBalance = 0D;
+			Double balance = account.getBalance();
+			if(balance >= updateBalanceDTO.getValue()) {
+				newBalance = balance - updateBalanceDTO.getValue();
+				account.setBalance(newBalance);
+			}
 		}
-		account.setBalance(newBalance);
 		Account accountUpdated = accountRepository.save(account);
 		return accountUpdated;
 	}

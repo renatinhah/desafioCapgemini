@@ -28,7 +28,7 @@ Valor do saldo
 Entrada:
 ```sh
 {
-	"agency": 2525,
+  "agency": 2525,
   "account": 2020,
   "password": "1234"
 }
@@ -42,7 +42,7 @@ Dados da conta com valor do saldo atualizado
 Entrada:
 ```sh
 {
-	"agency": 2525,
+    "agency": 2525,
     "account": 2020,
     "value": 100
 }
@@ -56,7 +56,7 @@ Dados da conta com valor do saldo atualizado
 Entrada:
 ```sh
 {
-	"agency": 2525,
+    "agency": 2525,
     "account": 2020,
     "value": 1100,
     "password": "1234"
@@ -71,8 +71,8 @@ Entrada:
 ```sh
 {
 	"accountId": {
-			"agency": 2525,
-			"account": 2067
+		"agency": 2525,
+		"account": 2067
 	},
 	"balance": 50,
 	"password": "12345"

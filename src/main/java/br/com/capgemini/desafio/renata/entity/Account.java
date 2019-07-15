@@ -1,29 +1,23 @@
 package br.com.capgemini.desafio.renata.entity;
 
-import java.io.Serializable;
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity(name = "Account")
-@IdClass(Account.class)
-@Getter @Setter 
+@Data 
+@Builder
 @NoArgsConstructor @AllArgsConstructor
-public class Account implements Serializable {
+public class Account {
+
+	@EmbeddedId
+	private AccountId accountId;
 	
-	@Id
-	private Long agency;
-	
-	@Id
-	private Long account;
-	
-	private String balance;
+	private Double balance;
 	
 	private String password;
 	

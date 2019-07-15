@@ -6,14 +6,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.capgemini.desafio.renata.dto.BalanceDTO;
 import br.com.capgemini.desafio.renata.entity.Account;
-import br.com.capgemini.desafio.renata.entity.AccountId;
 import br.com.capgemini.desafio.renata.service.AccountService;
 
 @RestController
@@ -33,9 +32,8 @@ public class AccountController {
     }
     
     @PostMapping("/balance")
-	public Double seeBalance(@RequestBody @Valid Account account){
-//		return accountService.seeBalance();
-    	return null;
+	public Double seeBalance(@RequestBody @Valid BalanceDTO balanceDto){
+		return accountService.seeBalance(balanceDto);
 	}
     
 //    @GetMapping("/balance/{accountId}")

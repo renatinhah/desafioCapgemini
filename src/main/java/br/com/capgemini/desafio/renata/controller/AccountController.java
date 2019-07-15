@@ -1,11 +1,8 @@
 package br.com.capgemini.desafio.renata.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +18,7 @@ import br.com.capgemini.desafio.renata.service.AccountService;
 public class AccountController {
 	@Autowired
 	private AccountService accountService;
-	
-	@GetMapping
-	public List<Account> list(){
-		return accountService.list();
-	}
-	
+
     @PostMapping
     public Account save(@RequestBody @Valid Account account) {
     	return accountService.save(account);
@@ -38,21 +30,13 @@ public class AccountController {
 	}
     
     @PostMapping("/deposit")
-	public Account deposit(@RequestBody @Valid UpdateBalanceDTO deposit){
-		return accountService.deposit(deposit);
+	public Account deposit(@RequestBody @Valid UpdateBalanceDTO updateBalanceDTO){
+		return accountService.deposit(updateBalanceDTO);
 	}
     
     @PostMapping("/cashOut")
-	public Account cashOut(@RequestBody @Valid UpdateBalanceDTO deposit){
-		return accountService.cashOut(deposit);
+	public Account cashOut(@RequestBody @Valid UpdateBalanceDTO updateBalanceDTO){
+		return accountService.cashOut(updateBalanceDTO);
 	}
-    
-    
-    
-    
-//    @GetMapping("/balance/{accountId}")
-//	public Double seeBalance(@PathVariable AccountId accountId){
-//		return accountService.seeBalance(accountId);
-//	}
  
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.capgemini.desafio.renata.dto.BalanceDTO;
+import br.com.capgemini.desafio.renata.dto.UpdateBalanceDTO;
 import br.com.capgemini.desafio.renata.entity.Account;
 import br.com.capgemini.desafio.renata.entity.AccountId;
 import br.com.capgemini.desafio.renata.repository.AccountRepository;
@@ -28,9 +29,44 @@ public class AccountService {
 				agency(balanceDto.getAgency()).
 				account(balanceDto.getAccount()).
 				build();
+		Double balance = 0D;
 		Account account = accountRepository.findByAccountId(accountId);
-		Double balance = account.getBalance();
-//		
+//		if(balanceDto.equals(account.getPassword())) {
+//			balance = account.getBalance();
+//		}
 		return balance;
+	}
+	
+	public Account deposit(UpdateBalanceDTO deposit) {
+		AccountId accountId = AccountId.builder().
+				agency(deposit.getAgency()).
+				account(deposit.getAccount()).
+				build();
+		Account account = accountRepository.findByAccountId(accountId);
+		Double newBalance = 0D;
+		if(deposit.getValue() > 0) {
+			newBalance = account.getBalance() + deposit.getValue();
+		}
+//		account.builder().balance(newBalance).build(); alguma coisa de acesso static
+		account.setBalance(newBalance);
+		Account accountUpdated = accountRepository.save(account);
+		
+		return accountUpdated;
+	}
+	
+	public Account cashOut(UpdateBalanceDTO deposit) {
+		AccountId accountId = AccountId.builder().
+				agency(deposit.getAgency()).
+				account(deposit.getAccount()).
+				build();
+		Account account = accountRepository.findByAccountId(accountId);
+		Double newBalance = 0D;
+		Double balance = account.getBalance();
+		if(balance >= deposit.getValue()) {
+			newBalance = balance - deposit.getValue();
+		}
+		account.setBalance(newBalance);
+		Account accountUpdated = accountRepository.save(account);
+		return accountUpdated;
 	}
 }

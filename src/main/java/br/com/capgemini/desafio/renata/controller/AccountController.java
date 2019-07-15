@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.capgemini.desafio.renata.dto.BalanceDTO;
+import br.com.capgemini.desafio.renata.dto.UpdateBalanceDTO;
 import br.com.capgemini.desafio.renata.entity.Account;
 import br.com.capgemini.desafio.renata.service.AccountService;
 
@@ -35,6 +36,19 @@ public class AccountController {
 	public Double seeBalance(@RequestBody @Valid BalanceDTO balanceDto){
 		return accountService.seeBalance(balanceDto);
 	}
+    
+    @PostMapping("/deposit")
+	public Account deposit(@RequestBody @Valid UpdateBalanceDTO deposit){
+		return accountService.deposit(deposit);
+	}
+    
+    @PostMapping("/cashOut")
+	public Account cashOut(@RequestBody @Valid UpdateBalanceDTO deposit){
+		return accountService.cashOut(deposit);
+	}
+    
+    
+    
     
 //    @GetMapping("/balance/{accountId}")
 //	public Double seeBalance(@PathVariable AccountId accountId){
